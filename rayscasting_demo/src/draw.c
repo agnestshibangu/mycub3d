@@ -12,11 +12,12 @@
 // 	return (true);
 // }
 
-void verLine(int x, int drawStart, int drawEnd, ColorRGB color) {
-	for (int y = drawStart; y < drawEnd; y++) {
-		int pixel_index = (x * bpp / 8) + (y * size_line);
-		img_data[pixel_index] = color.b; // Blue
-		img_data[pixel_index + 1] = color.g; // Green
-		img_data[pixel_index + 2] = color.r; // Red
-	}
-}
+// void verLine(int x, int drawStart, int drawEnd, ColorRGB color, int image_width) {
+//     int bpp = 24; // bits per pixel
+//     for (int y = drawStart; y < drawEnd; y++) {
+//         int pixel_index = (x + y * image_width) * (bpp / 8);
+//         img_data[pixel_index] = color.b; // Blue
+//         img_data[pixel_index + 1] = color.g; // Green
+//         img_data[pixel_index + 2] = color.r; // Red
+//     }
+// }

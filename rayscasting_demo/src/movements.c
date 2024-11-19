@@ -1,6 +1,7 @@
 #include "../cub3d.h"
 
-void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed) {
+void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24])
+{
 	if (worldMap[(int)(*posX + dirX * moveSpeed)][(int)(*posY)] == 0) {
 		*posX += dirX * moveSpeed;
 	}
@@ -9,7 +10,7 @@ void move_up(double *posX, double *posY, double dirX, double dirY, double moveSp
 	}
 }
 
-void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed) {
+void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]) {
 	if (worldMap[(int)(*posX - dirX * moveSpeed)][(int)(*posY)] == 0) {
 		*posX -= dirX * moveSpeed;
 	}
@@ -29,24 +30,25 @@ void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double r
 	*planeY = oldPlaneX * sin(rotSpeed * direction) + *planeY * cos(rotSpeed * direction);
 }
 
-void key_press()
+
+void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24])
 {
 	XEvent event;
-	while (XPending(mlx_ptr)) {
-	XNextEvent(mlx_ptr, &event);
+	while (XPending(data->mlx)) {
+	XNextEvent(data->mlx, &event);
 		if (event.type == KeyPress) {
 			int keysym = XLookupKeysym(&event.xkey, 0);
 			if (keysym == XK_w) {
-				move_up(&posX, &posY, dirX, dirY, 0.1);
+				move_up(posX, posY, dirX, dirY, 0.1, worldMap);
 			} 
 			else if (keysym == XK_s) {
-				move_down(&posX, &posY, dirX, dirY, 0.1);
+				move_down(posX, posY, dirX, dirY, 0.1,  worldMap);
 			} 
 			else if (keysym == XK_d) {
-				rotate(&dirX, &dirY, &planeX, &planeY, 0.1, -1); 
+				rotate(dirX, dirY, planeX, planeY, 0.1, -1); 
 			} 
 			else if (keysym == XK_a) {
-				rotate(&dirX, &dirY, &planeX, &planeY, 0.1, 1);
+				rotate(&dirX, &dirY, planeX, planeY, 0.1, 1);
 			} 
 			else if (keysym == XK_Escape) {
 				cleanup();
@@ -56,16 +58,16 @@ void key_press()
 	}
 }
 
-int rerendering(int keycode, )
-{
+// int rerendering(int keycode, )
+// {
 	
-	key_press(keycode);
-	cast_rays_and_render();
-	return (0);
-}
+// 	key_press(keycode);
+// 	cast_rays_and_render();
+// 	return (0);
+// }
 
-void	event_handler(t_param *param)
-{
-	mlx_hook(param->window, 2, 1L << 0, rerendering, param);
-	mlx_hook(param->window, 17, 0, close_window, param);
-}
+// void	event_handler(t_param *param)
+// {
+// 	mlx_hook(param->window, 2, 1L << 0, rerendering, param);
+// 	mlx_hook(param->window, 17, 0, close_window, param);
+// }

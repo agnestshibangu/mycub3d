@@ -21,7 +21,7 @@ int main(int ac, char **av)
 	// int size_line; // Size of a line in bytes
 	// int endian; // Endianness
 
-	// int worldMap[24][24]; 
+	int worldMap[24][24]; 
 
 	//double posX = 22;
 	// double posY = 12;

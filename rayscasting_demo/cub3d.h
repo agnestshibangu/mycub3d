@@ -5,6 +5,7 @@
 # include "../libft/libft.h" 
 # include <stdio.h>
 
+
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h> 
@@ -64,9 +65,14 @@ void verLine(int x, int drawStart, int drawEnd, ColorRGB color);
 double getTicks();
 // void print(double fps);
 void readKeys();
+
+// void key_press(double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY);
+
+void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24]);
+// void key_press( t_data *data, int posX, int posY, int dirY, int dirX, int planeY, int planeX, int worldMap[24][24]);
 bool keyDown(int key);
-void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed);
-void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed);
+void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
+void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
 void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double rotSpeed, int direction);
 void screen(int width, int height, int flags, const char* title);
 
