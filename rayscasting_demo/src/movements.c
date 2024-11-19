@@ -45,14 +45,14 @@ void key_press(t_data *data, double *posX, double *posY, double dirX, double dir
 				move_down(posX, posY, dirX, dirY, 0.1,  worldMap);
 			} 
 			else if (keysym == XK_d) {
-				rotate(dirX, dirY, planeX, planeY, 0.1, -1); 
+				rotate(&dirX, &dirY, planeX, planeY, 0.1, -1); 
 			} 
 			else if (keysym == XK_a) {
 				rotate(&dirX, &dirY, planeX, planeY, 0.1, 1);
 			} 
 			else if (keysym == XK_Escape) {
-				cleanup();
-				return 0;
+				mlx_destroy_image(data->mlx, data->img);
+				// return 0;
 			}
 		}
 	}

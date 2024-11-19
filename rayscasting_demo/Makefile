@@ -41,7 +41,7 @@ $(NAME): $(OBJS)
 	@echo "\n"
 	@echo "$(BOLD)$(ORANGE)⏳      Compilation in progress...      ⏳$(RESET)"
 	@make -sC ./libft
-	@make -sC ./mlx
+	@make -sC ./minilibx
 	@echo "\n"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(LDFLAGS) $(LIBMLX) -lXext -lX11 -lm
 	@echo "$(BOLD)$(GREEN)🎆           Compilation clear          🎆$(RESET)"
@@ -49,7 +49,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@make clean -sC libft
-	@make clean -sC mlx
+	@make clean -sC minilibx
 	@rm -rf $(DIR_OBJ)
 	@echo "$(BOLD)$(YELLOW)🧹🧼     Cleaned .o Cub3d's files     🧼🧹$(RESET)"
 	@echo "\n"

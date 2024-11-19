@@ -33,25 +33,21 @@ typedef struct s_data
 	char		*addr;
 	int			screenWidth;
 	int			screenHeight;
-	//int			bits_per_pixel;
-	//int			fd;
-	///int			*format;
-	//char		**map;
-	//char		*current_line;
-	//int			map_y;
-	//int			map_x;
-	//double		fov;
-	//t_vec		pos;
-	//t_vec		plane;
-	//t_vec		dir;
-	//int			color_floor;
-	//int			color_ceiling;
-	//t_texture	*tex;
-	//int			size_line;
-	//int			endian;
-	//t_ray		ray;
-	//t_mini		mini;
+	int			worldMap[24][24];
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
 }	t_data;
+
+
+	// ColorRGB RGB_Red = {255, 105, 180};
+	// ColorRGB RGB_Green = {255, 105, 180};
+	// ColorRGB RGB_Blue = {255, 105, 180};
+	// ColorRGB RGB_White = {255, 105, 180};
+	// ColorRGB RGB_Yellow = {255, 105, 180};
 
 typedef struct {
 	unsigned char r, g, b;
@@ -60,22 +56,27 @@ typedef struct {
 
 // Function declarations
 void print_ok();
+int	init_param(t_data *data);
 bool done();
-void verLine(int x, int drawStart, int drawEnd, ColorRGB color);
+// void verLine(int x, int drawStart, int drawEnd, ColorRGB color);
+// void verLine(int x, int drawStart, int drawEnd, ColorRGB color, int image_width);
+// void verLine(int x, int drawStart, int drawEnd, ColorRGB color, t_data *data);
+void verLine(int x, int drawStart, int drawEnd, unsigned char r, unsigned char g, unsigned char b, t_data *data);
+
+// void verLine(int x, int drawStart, int drawEnd, ColorRGB color, int image_width, t_data data);
 double getTicks();
 // void print(double fps);
 void readKeys();
 
 // void key_press(double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY);
-
+void	cast_rays_and_render(t_data *data);
 void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24]);
 // void key_press( t_data *data, int posX, int posY, int dirY, int dirX, int planeY, int planeX, int worldMap[24][24]);
 bool keyDown(int key);
 void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
 void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
 void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double rotSpeed, int direction);
-void screen(int width, int height, int flags, const char* title);
-
+int set_screen(const char* title, t_data *data);
 
 
 
