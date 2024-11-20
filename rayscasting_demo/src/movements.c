@@ -1,73 +1,63 @@
 #include "../cub3d.h"
 
-void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24])
+void move_up(t_data *data, double moveSpeed)
 {
-	if (worldMap[(int)(*posX + dirX * moveSpeed)][(int)(*posY)] == 0) {
-		*posX += dirX * moveSpeed;
-	}
-	if (worldMap[(int)(*posX)][(int)(*posY + dirY * moveSpeed)] == 0) {
-		*posY += dirY * moveSpeed;
-	}
+    if (data->worldMap[(int)(data->posX + data->dirX * moveSpeed)][(int)(data->posY)] == 0) {
+		printf ("%f\n", data->posX);
+        data->posX += data->dirX * moveSpeed;
+		printf ("%f\n", data->posX);
+    }
+    if (data->worldMap[(int)(data->posX)][(int)(data->posY + data->dirY * moveSpeed)] == 0) {
+		data->posY += data->dirY * moveSpeed;
+    }
 }
 
-void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]) {
-	if (worldMap[(int)(*posX - dirX * moveSpeed)][(int)(*posY)] == 0) {
-		*posX -= dirX * moveSpeed;
-	}
-	if (worldMap[(int)(*posX)][(int)(*posY - dirY * moveSpeed)] == 0) {
-		*posY -= dirY * moveSpeed;
-	}
-}
-
-void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double rotSpeed, int direction) {
-	double oldDirX = *dirX;
-	double oldPlaneX = *planeX;
-
-	*dirX = *dirX * cos(rotSpeed * direction) - *dirY * sin(rotSpeed * direction);
-	*dirY = oldDirX * sin(rotSpeed * direction) + *dirY * cos(rotSpeed * direction);
-
-	*planeX = *planeX * cos(rotSpeed * direction) - *planeY * sin(rotSpeed * direction);
-	*planeY = oldPlaneX * sin(rotSpeed * direction) + *planeY * cos(rotSpeed * direction);
-}
-
-
-void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24])
+void move_down(t_data *data, double moveSpeed)
 {
-	XEvent event;
-	while (XPending(data->mlx)) {
-	XNextEvent(data->mlx, &event);
-		if (event.type == KeyPress) {
-			int keysym = XLookupKeysym(&event.xkey, 0);
-			if (keysym == XK_w) {
-				move_up(posX, posY, dirX, dirY, 0.1, worldMap);
-			} 
-			else if (keysym == XK_s) {
-				move_down(posX, posY, dirX, dirY, 0.1,  worldMap);
-			} 
-			else if (keysym == XK_d) {
-				rotate(&dirX, &dirY, planeX, planeY, 0.1, -1); 
-			} 
-			else if (keysym == XK_a) {
-				rotate(&dirX, &dirY, planeX, planeY, 0.1, 1);
-			} 
-			else if (keysym == XK_Escape) {
-				mlx_destroy_image(data->mlx, data->img);
-				// return 0;
-			}
-		}
-	}
+    if (data->worldMap[(int)(data->posX - data->dirX * moveSpeed)][(int)(data->posY)] == 0) {
+        data->posX -= data->dirX * moveSpeed;
+    }
+    if (data->worldMap[(int)(data->posX)][(int)(data->posY - data->dirY * moveSpeed)] == 0) {
+        data->posY -= data->dirY * moveSpeed;
+    }
 }
 
-// int rerendering(int keycode, )
-// {
-	
-// 	key_press(keycode);
-// 	cast_rays_and_render();
-// 	return (0);
+void rotate(t_data *data, double rotSpeed, int direction) {
+    double oldDirX = data->dirX;
+    double oldPlaneX = data->planeX;
+
+    data->dirX = data->dirX * cos(rotSpeed * direction) - data->dirY * sin(rotSpeed * direction);
+    data->dirY = oldDirX * sin(rotSpeed * direction) + data->dirY * cos(rotSpeed * direction);
+
+    data->planeX = data->planeX * cos(rotSpeed * direction) - data->planeY * sin(rotSpeed * direction);
+    data->planeY = oldPlaneX * sin(rotSpeed * direction) + data->planeY * cos(rotSpeed * direction);
+}
+
+// void key_press(t_data *data)
+//  {
+//     XEvent event;
+//     while (XPending(data->mlx)) {
+//         XNextEvent(data->mlx, &event);
+//         if (event.type == KeyPress) {
+//             int keysym = XLookupKeysym(&event.xkey, 0);
+//             if (keysym == XK_w) {
+//                 move_up(data, 0.1);
+//             } 
+//             else if (keysym == XK_s) {
+//                 move_down(data, 0.1);
+//             } 
+//             else if (keysym == XK_d) {
+//                 rotate(data, 0.1, -1); 
+//             } 
+//             else if (keysym == XK_a) {
+//                 rotate(data, 0.1, 1);
+//             } 
+//             else if (keysym == XK_Escape) {
+//                 mlx_destroy_image(data->mlx, data->img);
+//                 exit(0);
+//             }
+//         }
+//     }
 // }
 
-// void	event_handler(t_param *param)
-// {
-// 	mlx_hook(param->window, 2, 1L << 0, rerendering, param);
-// 	mlx_hook(param->window, 17, 0, close_window, param);
-// }
+

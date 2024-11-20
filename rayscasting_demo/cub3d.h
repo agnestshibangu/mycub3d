@@ -64,18 +64,29 @@ bool done();
 void verLine(int x, int drawStart, int drawEnd, unsigned char r, unsigned char g, unsigned char b, t_data *data);
 
 // void verLine(int x, int drawStart, int drawEnd, ColorRGB color, int image_width, t_data data);
-double getTicks();
+// double getTicks();
 // void print(double fps);
-void readKeys();
+// void readKeys();
+// void	event_handler(t_param *param);
 
 // void key_press(double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY);
 void	cast_rays_and_render(t_data *data);
-void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24]);
+int	rerendering(t_data *data);
+void key_press(t_data *data);
+//void key_press(t_data *data, double *posX, double *posY, double dirX, double dirY, double *planeX, double *planeY, int worldMap[24][24]);
 // void key_press( t_data *data, int posX, int posY, int dirY, int dirX, int planeY, int planeX, int worldMap[24][24]);
-bool keyDown(int key);
-void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
-void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
-void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double rotSpeed, int direction);
+//bool keyDown(int key);
+
+void move_up(t_data *data, double moveSpeed);
+void move_down(t_data *data, double moveSpeed);
+void rotate(t_data *data, double rotSpeed, int direction);
+void key_press(t_data *data);
+// int	rerendering(int keycode, t_data *data);
+void	event_handler(t_data *data);
+
+//void move_up(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
+//void move_down(double *posX, double *posY, double dirX, double dirY, double moveSpeed, int worldMap[24][24]);
+//void rotate(double *dirX, double *dirY, double *planeX, double *planeY, double rotSpeed, int direction);
 int set_screen(const char* title, t_data *data);
 
 

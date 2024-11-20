@@ -24,7 +24,7 @@ int main(int ac, char **av)
 	if (set_screen(title, data))
 		printf("setting screen okay\n");
 	cast_rays_and_render(data);
-	// event_handler(data);
+	event_handler(data);
 	mlx_loop(data->mlx);
 	// //cleanup();
 	return (0);

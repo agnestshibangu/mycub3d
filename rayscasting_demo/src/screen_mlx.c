@@ -29,7 +29,6 @@ int set_screen(const char* title, t_data *data)
 
 void render(t_data *data) 
 {
-	// clearScreen();
-	// cleanup();
+	
 	mlx_put_image_to_window(data->mlx, data->window, data->img, 0, 0);
 }
