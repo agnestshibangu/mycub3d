@@ -4,20 +4,11 @@ void cast_rays_and_render(t_data *data)
 {
     int w = data->screenWidth;
     int h = data->screenHeight;
-
-	
-	// 	// After initializing the values, you can add the following debug prints
-	// printf("Screen Width: %d\n", data->screenWidth);
-	// printf("Screen Height: %d\n", data->screenHeight);
-	// printf("Player Position: (posX: %.2f, posY: %.2f)\n", data->posX, data->posY);
-	// printf("Direction: (dirX: %.2f, dirY: %.2f)\n", data->dirX, data->dirY);
-	// printf("Plane: (planeX: %.2f, planeY: %.2f)\n", data->planeX, data->planeY);
-
-
     int x = 0;
+
     while (x < w) 
     {
-        double cameraX = 2 * x / (double)w - 1;  // Correction pour cameraX
+        double cameraX = 2 * x / (double)w - 1;
         double rayDirX = data->dirX + (data->planeX) * cameraX;
         double rayDirY = data->dirY + (data->planeY) * cameraX;
         int mapX = (int)(data->posX);
@@ -89,13 +80,18 @@ void cast_rays_and_render(t_data *data)
 
         // Déterminer la couleur
         unsigned char r, g, b;
-        switch (data->worldMap[mapX][mapY]) {
-            case 1: r = 255; g = 0;   b = 0;   break; // Rouge
-            case 2: r = 0;   g = 255; b = 0;   break; // Vert
-            case 3: r = 0;   g = 0;   b = 255; break; // Bleu
-            case 4: r = 255; g = 255; b = 255; break; // Blanc
-            default: r = 255; g = 255; b = 0;   break; // Jaune
-        }
+
+		if (data->worldMap[mapX][mapY] == 1){
+			r = 255; g = 0; b = 0;   // Rouge
+		} else if (data->worldMap[mapX][mapY] == 2) {
+			r = 0;   g = 255; b = 0;   // Vert
+		} else if (data->worldMap[mapX][mapY] == 3) {
+			r = 0;   g = 0;   b = 255; // Bleu
+		} else if (data->worldMap[mapX][mapY] == 4) {
+			r = 255; g = 255; b = 255; // Blanc
+		} else {
+			r = 255; g = 255; b = 0;   // Jaune (par défaut)
+		}
 
         // Assombrir la couleur si le côté est 1
         if (side == 1) {

@@ -1,11 +1,5 @@
 #include "../cub3d.h"
 
-void print_ok()
-{
-	printf("OOKKKKKKKKKKKK\n");
-}
-
-
 int	init_param(t_data *data)
 {
 	data->mlx = NULL;

@@ -33,31 +33,3 @@ void rotate(t_data *data, double rotSpeed, int direction) {
     data->planeY = oldPlaneX * sin(rotSpeed * direction) + data->planeY * cos(rotSpeed * direction);
 }
 
-// void key_press(t_data *data)
-//  {
-//     XEvent event;
-//     while (XPending(data->mlx)) {
-//         XNextEvent(data->mlx, &event);
-//         if (event.type == KeyPress) {
-//             int keysym = XLookupKeysym(&event.xkey, 0);
-//             if (keysym == XK_w) {
-//                 move_up(data, 0.1);
-//             } 
-//             else if (keysym == XK_s) {
-//                 move_down(data, 0.1);
-//             } 
-//             else if (keysym == XK_d) {
-//                 rotate(data, 0.1, -1); 
-//             } 
-//             else if (keysym == XK_a) {
-//                 rotate(data, 0.1, 1);
-//             } 
-//             else if (keysym == XK_Escape) {
-//                 mlx_destroy_image(data->mlx, data->img);
-//                 exit(0);
-//             }
-//         }
-//     }
-// }
-
-
