@@ -21,13 +21,20 @@ int	controls_working(int keysym, t_data *data)
 		move_down(data, 0.1);
 	else if (keysym == XK_Escape)
 		close_window(data);
-	cast_rays_and_render(data);
 	return (1);
+}
+
+int rerendering(int keysym, t_data *data)
+{
+	ft_bzero(data->addr, data->screenWidth * data->screenHeight * sizeof(int));
+	controls_working(keysym, data);
+	cast_rays_and_render(data);
+	return (0);
+
 }
 
 void	event_handler(t_data *data)
 {
-	mlx_key_hook(data->window, controls_working, data);
+	mlx_key_hook(data->window, rerendering, data);
 	mlx_hook(data->window, 17, 0, close_window,  data);
-	mlx_loop(data->mlx);
 }
