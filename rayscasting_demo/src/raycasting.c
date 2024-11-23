@@ -100,7 +100,8 @@ void cast_rays_and_render(t_data *data)
             b /= 2;
         }
 
-        // Appeler verLine avec les composantes de couleur
+        draw_ceiling(x, drawStart, data);
+        draw_floor(x, drawEnd, data);
         verLine(x, drawStart, drawEnd, r, g, b, data);
 
         x++;
