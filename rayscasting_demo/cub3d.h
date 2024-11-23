@@ -34,6 +34,7 @@ typedef struct s_data
 	int			screenWidth;
 	int			screenHeight;
 	int			worldMap[24][24];
+	char		keys[256];
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -41,13 +42,6 @@ typedef struct s_data
 	double		planeX;
 	double		planeY;
 }	t_data;
-
-
-	// ColorRGB RGB_Red = {255, 105, 180};
-	// ColorRGB RGB_Green = {255, 105, 180};
-	// ColorRGB RGB_Blue = {255, 105, 180};
-	// ColorRGB RGB_White = {255, 105, 180};
-	// ColorRGB RGB_Yellow = {255, 105, 180};
 
 typedef struct {
 	int	r;
@@ -60,15 +54,19 @@ typedef struct {
 void print_ok();
 int	init_param(t_data *data);
 bool done();
+
+// int	key_release(int keycode, t_data *data);
 void verLine(int x, int drawStart, int drawEnd, unsigned char r, unsigned char g, unsigned char b, t_data *data);
 void	cast_rays_and_render(t_data *data);
 // int	rerendering(t_data *data);
 int rerendering(int keysym, t_data *data);
-void key_press(t_data *data);
+// void key_press(t_data *data);
+int key_press(int keycode, t_data *data);
+int key_release(int keycode, t_data *data);
 void move_up(t_data *data, double moveSpeed);
 void move_down(t_data *data, double moveSpeed);
 void rotate(t_data *data, double rotSpeed, int direction);
-void key_press(t_data *data);
+// void key_press(t_data *data);
 void	event_handler(t_data *data);
 int set_screen(const char* title, t_data *data);
 

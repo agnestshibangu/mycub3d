@@ -1,6 +1,5 @@
 #include "../cub3d.h"
 
-
 void verLine(int x, int drawStart, int drawEnd, unsigned char r, unsigned char g, unsigned char b, t_data *data)
 {
     int bpp = 32;
