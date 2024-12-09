@@ -5,7 +5,7 @@ void init_images_walls(t_data *data, int i)
 	void *img;
 	int width, height;
 
-    data->texture[i].path = "./assets/img1.xpm";
+    data->texture[i].path = "./assets/img2.xpm";
 	data->texture[i].bits_per_pixels = 32;
 	data->texture[i].endian = 0;
     img = mlx_xpm_file_to_image(data->mlx, data->texture[i].path, &width, &height);

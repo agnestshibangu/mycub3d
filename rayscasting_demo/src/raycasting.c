@@ -100,6 +100,8 @@ void cast_rays_and_render(t_data *data)
             b /= 2;
         }
 		//
+
+
 		int textureIndex = 0;  // L'index de la texture à utiliser (cela pourrait être calculé en fonction du rayon)
 		verLine(x, drawStart, drawEnd, data, textureIndex);
 
