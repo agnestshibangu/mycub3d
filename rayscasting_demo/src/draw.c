@@ -1,25 +1,26 @@
 #include "../cub3d.h"
 
-void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex)
+void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex, int textureX)
 {
     int y;
-	int x;
-    int bpp = 32;  // Bits per pixel
+    int bpp = 32;
     char *img_data = data->addr;
-    
-    // Get the texture height and width
-    // int textureWidth = data->texture[textureIndex].width;
-    // int textureHeight = data->texture[textureIndex].height;
 
-	while ()
+    int textureWidth = data->texture[textureIndex].width;
+    int textureHeight = data->texture[textureIndex].height;
     
-    // Loop through each pixel in the vertical line (y from drawStart to drawEnd)
+    double step = (double)textureHeight / (drawEnd - drawStart);
+    double texturePos = 0.0;
+    // int textureX = (x % textureWidth);
+
     for (y = drawStart; y < drawEnd; y++) {
-     
-        
+
+        int textureY = (int)texturePos % textureHeight;
+        texturePos += step;
+
         // Get the pixel color from the texture
-        // unsigned int pixel = data->texture[textureIndex].pixels[textureY * textureWidth + textureX];
-		unsigned int pixel = data->wall[textureIndex][y - drawStart];  // Assurez-vous que l'index est correct pour la texture
+        unsigned int pixel = data->wall[textureIndex][textureY * textureWidth + textureX];
+       
         // Extract RGB components
         unsigned char red = (pixel >> 16) & 0xFF;
         unsigned char green = (pixel >> 8) & 0xFF;
@@ -29,11 +30,47 @@ void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex)
         int pixel_index = (x + y * data->screenWidth) * (bpp / 8);
 
         // Set the pixel colors in the image data (screen buffer)
-        img_data[pixel_index] = red;      // Red
-        img_data[pixel_index + 1] = green; // Green
-        img_data[pixel_index + 2] = blue;  // Blue
+        img_data[pixel_index] = red;
+        img_data[pixel_index + 1] = green;
+        img_data[pixel_index + 2] = blue;
     }
 }
+
+// void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex)
+// {
+//     int y;
+//     int bpp = 32;
+//     char *img_data = data->addr;
+
+//     int textureWidth = data->texture[textureIndex].width;
+//     int textureHeight = data->texture[textureIndex].height;
+    
+//     double step = (double)textureHeight / (drawEnd - drawStart);
+//     double texturePos = 0.0;
+//     int textureX = (x % textureWidth);
+
+//     for (y = drawStart; y < drawEnd; y++) {
+
+//         int textureY = (int)texturePos % textureHeight;
+//         texturePos += step;
+
+//         // Get the pixel color from the texture
+//         unsigned int pixel = data->wall[textureIndex][textureY * textureWidth + textureX];
+       
+//         // Extract RGB components
+//         unsigned char red = (pixel >> 16) & 0xFF;
+//         unsigned char green = (pixel >> 8) & 0xFF;
+//         unsigned char blue = pixel & 0xFF;
+
+//         // Calculate the pixel index in the final image (screen)
+//         int pixel_index = (x + y * data->screenWidth) * (bpp / 8);
+
+//         // Set the pixel colors in the image data (screen buffer)
+//         img_data[pixel_index] = red;
+//         img_data[pixel_index + 1] = green;
+//         img_data[pixel_index + 2] = blue;
+//     }
+// }
 
 
 // void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex)

@@ -79,7 +79,9 @@ bool done();
 // int	key_release(int keycode, t_data *data);
 void draw_ceiling(int x, int drawStart, t_data *data);
 void draw_floor(int x, int drawEnd, t_data *data);
-void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex);
+
+void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex, int textureX);
+// void verLine(int x, int drawStart, int drawEnd, t_data *data, int textureIndex);
 // void verLine(int x, int drawStart, int drawEnd, unsigned char r, unsigned char g, unsigned char b, t_data *data);
 void	cast_rays_and_render(t_data *data);
 // int	rerendering(t_data *data);

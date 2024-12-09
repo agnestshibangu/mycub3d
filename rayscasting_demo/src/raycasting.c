@@ -11,6 +11,8 @@ void cast_rays_and_render(t_data *data)
         double cameraX = 2 * x / (double)w - 1;
         double rayDirX = data->dirX + (data->planeX) * cameraX;
         double rayDirY = data->dirY + (data->planeY) * cameraX;
+        printf("dirX %f\n", data->planeX);
+        printf("dirX %f\n", data->planeY);
         int mapX = (int)(data->posX);
         int mapY = (int)(data->posY);
         double sideDistX;
@@ -43,7 +45,7 @@ void cast_rays_and_render(t_data *data)
             stepY = 1;
             sideDistY = (mapY + 1.0 - (data->posY)) * deltaDistY;
         }
-
+    
         // DDA
         while (hit == 0) {
             if (sideDistX < sideDistY) {
@@ -67,7 +69,7 @@ void cast_rays_and_render(t_data *data)
         } else {
             perpWallDist = (sideDistY - deltaDistY);
         }
-
+        printf("perpWallDist %f\n",perpWallDist);
         int lineHeight = (int)(h / perpWallDist);
         int drawStart = -lineHeight / 2 + h / 2;
         int drawEnd = lineHeight / 2 + h / 2;
@@ -82,31 +84,42 @@ void cast_rays_and_render(t_data *data)
         unsigned char r, g, b;
 
 		if (data->worldMap[mapX][mapY] == 1){
-			r = 255; g = 0; b = 0;   // Rouge
+			r = 255; g = 0; b = 0;
 		} else if (data->worldMap[mapX][mapY] == 2) {
-			r = 0;   g = 255; b = 0;   // Vert
+			r = 0;   g = 255; b = 0;
 		} else if (data->worldMap[mapX][mapY] == 3) {
-			r = 0;   g = 0;   b = 255; // Bleu
+			r = 0;   g = 0;   b = 255;
 		} else if (data->worldMap[mapX][mapY] == 4) {
-			r = 255; g = 255; b = 255; // Blanc
+			r = 255; g = 255; b = 255;
 		} else {
-			r = 255; g = 255; b = 0;   // Jaune (par défaut)
+			r = 255; g = 255; b = 0;
 		}
 
-        // Assombrir la couleur si le côté est 1
         if (side == 1) {
             r /= 2;
             g /= 2;
             b /= 2;
         }
-		//
-
-
-		int textureIndex = 0;  // L'index de la texture à utiliser (cela pourrait être calculé en fonction du rayon)
-		verLine(x, drawStart, drawEnd, data, textureIndex);
-
-		// 
 		
+        double wallX; 
+        if (side == 0) {
+            wallX = data->posY + perpWallDist * rayDirY;
+        } else {
+            wallX = data->posX + perpWallDist * rayDirX;
+        }
+        wallX -= floor(wallX);
+        int textureIndex = 0;
+
+        // Calculate the textureX coordinate
+        int textureWidth = data->texture[textureIndex].width;
+        int textureX = (int)(wallX * textureWidth);
+        if (side == 0 && rayDirX > 0) textureX = textureWidth - textureX - 1;
+        if (side == 1 && rayDirY < 0) textureX = textureWidth - textureX - 1;
+
+        // int textureIndex = 0; 
+        
+        verLine(x, drawStart, drawEnd, data, textureIndex, textureX);
+		//verLine(x, drawStart, drawEnd, data, textureIndex);		
         draw_ceiling(x, drawStart, data);
         draw_floor(x, drawEnd, data);
         // verLine(x, drawStart, drawEnd, r, g, b, data);
