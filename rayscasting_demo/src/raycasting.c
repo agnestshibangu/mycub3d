@@ -70,10 +70,10 @@ void cast_rays_and_render(t_data *data)
 
         int lineHeight = (int)(h / perpWallDist);
         int drawStart = -lineHeight / 2 + h / 2;
+        int drawEnd = lineHeight / 2 + h / 2;
         if (drawStart < 0) {
             drawStart = 0;
         }
-        int drawEnd = lineHeight / 2 + h / 2;
         if (drawEnd >= h) {
             drawEnd = h - 1;
         }
@@ -99,10 +99,15 @@ void cast_rays_and_render(t_data *data)
             g /= 2;
             b /= 2;
         }
+		//
+		int textureIndex = 0;  // L'index de la texture à utiliser (cela pourrait être calculé en fonction du rayon)
+		verLine(x, drawStart, drawEnd, data, textureIndex);
 
+		// 
+		
         draw_ceiling(x, drawStart, data);
         draw_floor(x, drawEnd, data);
-        verLine(x, drawStart, drawEnd, r, g, b, data);
+        // verLine(x, drawStart, drawEnd, r, g, b, data);
 
         x++;
     }

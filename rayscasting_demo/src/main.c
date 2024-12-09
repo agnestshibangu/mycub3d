@@ -23,6 +23,8 @@ int main(int ac, char **av)
 		printf("init param okay\n"); 
 	if (set_screen(title, data))
 		printf("setting screen okay\n");
+	init_texture(data);
+	printf("init texture okay\n");
 	cast_rays_and_render(data);
 	event_handler(data);
 	mlx_loop(data->mlx);
